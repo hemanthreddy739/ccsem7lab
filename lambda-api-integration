@@ -1,0 +1,32 @@
+import json
+print("Function")
+
+def lambda_handler(event, context):
+    transactionId = event['queryStringParameters']['transactionId']
+    transactionType = event['queryStringParameters']['type']
+    transactionAmount = event['queryStringParameters']['amount']
+    
+    print('TransactionId = ' + transactionId)
+    print('TransactionType = ' + transactionType)
+    print('TransactionAmount = ' + transactionAmount)
+    
+    transactionResponse = {}
+    transactionResponse['transactionId'] = transactionId
+    transactionResponse['type'] = transactionType
+    transactionResponse['amount'] = transactionAmount
+    transactionResponse['message'] = 'Hello, welcome from Lambda Function!'
+    
+    responseObject = {}
+    responseObject['statusCode'] = 200
+    responseObject['headers'] = {}
+    responseObject['headers']['Content-Type'] = 'application/json'
+    responseObject['body'] = json.dumps(transactionResponse)
+    
+    return responseObject
+    
+    
+    
+    -----------------------------------------------------------
+    data-passing through url
+    
+    https://x4mfw3jdz7.execute-api.ap-south-1.amazonaws.com/sem7-api-lamda-test/testapi-lambda?transactionId=768&type=exchange&amount=8700
